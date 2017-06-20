@@ -1,0 +1,39 @@
+<% if action == :edit %>
+  <% action_url = cat_url(cat) %>
+<% else %>
+  <% action_url = cats_url %>
+<% end %>
+<form  action= "<%= action_url %>" method="post">
+  <% if action == :edit %>
+    <input type="hidden" name="_method" value="PATCH">
+  <% end %>
+  <label for="name">Name</label>
+  <input id="name" type="text" name="cat[name]" value="<%= cat.name %>">
+  <br>
+
+  <label for="birthdate">Birth Date</label>
+  <input id="birthdate" type="date" name="cat[birthdate]" value="<%=cat.birthdate %>">
+  <br>
+
+  <label for="description">Description</label>
+  <textarea name="cat[description]"><%= cat.description %></textarea>
+  <br>
+
+  <label for="sex">Sex</label>
+  <input type="radio" value="M" name="cat[sex]" <%= cat.sex=="M" ? "checked" :""%>>M</input>
+  <input type="radio" value="F"  name="cat[sex]" <%= cat.sex=="F" ? "checked" :""%>>F</input>
+  <input type="radio" value="N"  name="cat[sex]" <%= cat.sex=="N" ? "checked" :""%>>N</input>
+  <br>
+
+  <label for="color">Color</label>
+  <select name="cat[color]">
+    <option disabled <%= cat.color ? "" : "selected" %> >--Choose a Color--</option>
+    <option <%= cat.color == "calixico" ? "selected" : "" %> >calixico</option>
+    <option <%= cat.color == "black" ? "selected" : "" %> >black</option>
+    <option <%= cat.color == "brown" ? "selected" : "" %> >brown</option>
+    <option <%= cat.color == "white" ? "selected" : "" %> >white</option>
+    <option <%= cat.color == "grey" ? "selected" : "" %> >grey</option>
+    <option <%= cat.color == "blue" ? "selected" : "" %> >blue</option>
+  </select>
+  <input type="submit" value="Submit">
+</form>
